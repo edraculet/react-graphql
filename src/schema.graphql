@@ -1,0 +1,20 @@
+export const typeDefs = `
+type User {
+    id: ID!
+    name: String @fake(type: fullName)
+    email: String @fake(type: email)
+    status: String @examples(values: ["Active","Inactive"])
+    role:String @fake(type: role)
+}
+
+# The "Query" type is special: it lists all of the available queries that
+# clients can execute, along with the return type for each.
+                                                          type Query {
+    allUsers: [User!]! @listLength(min: 10, max: 25)
+}
+
+type Mutation {
+    addUser(name: String!, email: String, status: String): User!
+    removeUser(id: ID!): User!
+}
+`
